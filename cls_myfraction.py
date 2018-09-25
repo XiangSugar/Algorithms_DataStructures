@@ -11,23 +11,28 @@ class myFraction(object):
     def show(self):
         print(r'%s/%s' %(self.num, self.den))
     
+    def __str__(self):
+        return str(self.num)+'/'+str(self.den)
+
     def __add__(self, otherfraction):
         newnum = self.num*otherfraction.den + self.den*otherfraction.num
         newden = self.den*otherfraction.den
         max_com_divisor = gcd(newnum, newden)
         
         if max_com_divisor == 1:
-            return (r'%s/%s'%(newnum,newden))
+            return (r'%s/%s' %(newnum,newden))
         else:
-            Newnum = newnum/max_com_divisor
-            Newden = newden/max_com_divisor
-            return (r'%s/%s'(Newnum,Newden))
+            simple_newnum = int(newnum/max_com_divisor)
+            simple_newden = int(newden/max_com_divisor)
+            return (r'%s/%s' %(simple_newnum,simple_newden))
 
-myfraction = myFraction(3,5)
-myf = myFraction(4,9)
+myf_1 = myFraction(1,3)
+myf_2 = myFraction(8,15)
 
-myfraction.show()
-myf.show()
+myf_1.show()
+print(myf_1)
+myf_2.show()
+print(myf_2)
 
-data = myfraction + myf
+data = myf_1 + myf_2
 print(data)
