@@ -17,16 +17,33 @@ class BinaryGate(LogicGate):
         self.pinA = None
         self.pinB = None
     def getPinA(self):
-        return int(input("Enter Pin A input for gate " + self.getLable() + " --> "))
+        if self.pinA == None:
+            return int(input("Enter Pin A input for gate " + self.getLable() + " --> "))
+        else:
+            return self.pinA.getFrom().getOutput()
     def getPinB(self):
-        return int(input("Enter Pin B input for gate " + self.getLable() + " --> "))
+        if self.pinB == None:
+            return int(input("Enter Pin B input for gate " + self.getLable() + " --> "))
+        else:
+            return self.pinB.getFrom().getOutput()
+    def setNextPin(self, source):
+        if self.pinA == None:
+            self.pinA = source
+        else:
+            if self.pinB == None:
+                self.pinB = source
+            else:
+                raise RuntimeError("Error:NO EMPTY PINS!")
 
 class UnaryGate(LogicGate):
     def __init__(self, n):
         LogicGate.__init__(self, n)
         self.pin = None
     def getPin(self):
-        return int(input("Enter Pin input for gate " + self.getLable() + " --> "))
+        if self.pin == None:
+            return int(input("Enter Pin input for gate " + self.getLable() + " --> "))
+        else:
+            return self.pin.getFrom().getOutput()
 
 class AndGate(BinaryGate):
     def __init__(self, n):
@@ -60,12 +77,27 @@ class NotGate(UnaryGate):
         else:
             return 1
 
+class Connector(object):
+    def __init__(self, fgate, tgate):
+        self.fromgate = fgate
+        self.togate = tgate
+        tgate.setNextPin(self)
+    def getFrom(self):
+        return self.fromgate
+    def getTo(self):
+        return self.togate
+            
 g1 = AndGate("G1")
-print(g1.getOutput())
+g2 = AndGate("G2")
+g3 = OrGate("G3")
+g4 = NotGate("G4")
 
-g2 = OrGate("G2")
-print(g2.getOutput())
+c1 = Connector(g1, g3)
+c2 = Connector(g2, g3)
+c3 = Connector(g3, g4)
 
-g3 = NotGate("G3")
-print(g3.getOutput())
+g4.getOutput()
+
+
+# This program is not done
         
