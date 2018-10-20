@@ -23,7 +23,6 @@ class Printer(object):
         self.currentTask = newtask
         self.timeRemaining = newtask.getPages() * 60 / self.pagerate
 
-
 class Task(object):
     def __init__(self, time):
         self.timestamp = time
@@ -58,6 +57,6 @@ def newPrintTask():
         return True
     else:
         return False
-    
+        
 for i in range(10):
     simulation(3600, 5)
