@@ -48,8 +48,8 @@ class my_UnorderedList(object):
         while current != None:
             print(current.getData())
             current = current.getNext()
-    
-if __name__ == '__main__':
+
+def main():
     UnorderedList = my_UnorderedList()
     print(UnorderedList.isEmpty())
     UnorderedList.add(43)
@@ -61,5 +61,9 @@ if __name__ == '__main__':
     print(UnorderedList.search("Dog"))
     UnorderedList.reMove(6.99)
     UnorderedList.showitems()
+    
+if __name__ == '__main__':
+    main()
+    
 
     
