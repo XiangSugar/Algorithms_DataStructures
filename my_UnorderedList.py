@@ -6,7 +6,7 @@ from my_Node import my_Node
 
 class my_UnorderedList(object):
     def __init__(self):
-        self.head = None    # head 其实是对链式存储结构的第一个节点的一个引用（本质上它是一个节点类型的值）
+        self.head = None    # head 其实是对链式存储结构的第一个节点的一个引用（注意：它到底是不是一个节点类型的值？？？？没太想清楚）
     def isEmpty(self):
         return self.head == None
     def add(self, newdata):
@@ -15,7 +15,7 @@ class my_UnorderedList(object):
         self.head = temp
     def size(self):
         current = self.head
-        count = 0
+        count   = 0
         while current != None:
             count += 1
             current = current.getNext()
@@ -39,9 +39,9 @@ class my_UnorderedList(object):
             else:
                 previous = current
                 current = current.getNext()
-        if previous == None:
+        if previous == None:  # 表明第一项正好是要删除的值，则只需要把 head 往后移动一下即可，也没有前一个节点的说法了，因此不用管 previous
             self.head = current.getNext()
-        else:
+        else:                 # 表明删除的值不是第一项，则需要将 previous 指向的节点的对下一个节点的引用往后挪动一下
             previous.setNext(current.getNext())
     def showitems(self):
         current = self.head
